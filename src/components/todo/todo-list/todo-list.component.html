@@ -1,0 +1,10 @@
+<div class="todo-list">
+  <h1>Todo list</h1>
+  @for(item of items; track item.id) {
+    <app-todo-item [label]="item.label"></app-todo-item>
+  }
+  <div class="todo-list__add-item">
+    <app-input placeholder="Add your new todo"></app-input>
+    <app-button label="Add task" class="add"></app-button>
+  </div>
+</div>
