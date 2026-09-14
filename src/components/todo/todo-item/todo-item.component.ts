@@ -1,18 +1,12 @@
-import { Component, input } from "@angular/core";
-import { AppButtonDirective } from "../../../shared/app-button/app-button.directive";
+import { Component, input, output } from "@angular/core";
+import { TodoItem } from "../models/todo-item.interface";
 
 @Component({
   selector: "app-todo-item",
   templateUrl: "./todo-item.component.html",
   styleUrl: "./todo-item.component.scss",
-  imports: [
-    AppButtonDirective
-  ],
 })
 export class TodoItemComponent {
-  label = input("");
-
-  deleteItem() {
-    console.log("delete", this.label());
-  }
+  item = input.required<TodoItem>();
+  deleteItem = output<number>();
 }

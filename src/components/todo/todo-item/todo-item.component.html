@@ -1,4 +1,9 @@
 <div class="todo-item">
-  {{ label() }}
-  <button appButton type="button" class="delete" (click)="deleteItem()">Delete</button>
+  {{ item().text }}
+  <button
+    class="button button--delete"
+    type="button"
+    (click)="deleteItem.emit(item().id)">
+    Delete
+  </button>
 </div>

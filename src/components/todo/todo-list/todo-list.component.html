@@ -1,10 +1,18 @@
 <div class="todo-list">
   <h1>Todo list</h1>
-  @for(item of items; track item.id) {
-    <app-todo-item [label]="item.label"></app-todo-item>
+  @for (item of items(); track item.id) {
+    <app-todo-item [item]="item" (deleteItem)="deleteItem($event)"></app-todo-item>
   }
   <div class="todo-list__add-item">
-    <input appInput placeholder="Add your new todo">
-    <button appButton type="button" class="add">Add task</button>
+    <mat-form-field class="todo-list__input">
+      <input matInput placeholder="Add your new todo" [(ngModel)]="newTodoText" />
+    </mat-form-field>
+    <button
+      class="button button--add"
+      type="button"
+      [disabled]="!newTodoText.trim()"
+      (click)="addItem()">
+      Add task
+    </button>
   </div>
 </div>
