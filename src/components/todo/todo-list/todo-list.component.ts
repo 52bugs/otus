@@ -2,14 +2,14 @@ import { Component, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { TodoItemComponent } from "../todo-item/todo-item.component";
+import { ToDoListItemComponent } from "../todo-item/todo-item.component";
 import { TodoItem } from "../models/todo-item.interface";
 
 @Component({
   selector: "app-todo-list",
   templateUrl: "./todo-list.component.html",
   styleUrl: "./todo-list.component.scss",
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, TodoItemComponent],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, ToDoListItemComponent],
 })
 export class TodoListComponent {
   readonly items = signal<TodoItem[]>([
