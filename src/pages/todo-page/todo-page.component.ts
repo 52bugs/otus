@@ -4,7 +4,7 @@ import { TodoListComponent } from "../../components/todo/todo-list/todo-list.com
 @Component({
   selector: "app-todo-page",
   templateUrl: "./todo-page.component.html",
-  styleUrls: ["./todo-page.component.scss"],
+  styleUrl: "./todo-page.component.scss",
   imports: [
     TodoListComponent,
   ],

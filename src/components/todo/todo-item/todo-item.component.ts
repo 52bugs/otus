@@ -1,18 +1,18 @@
-import { Component, Input } from "@angular/core";
-import { SharedModule } from "../../../shared/shared.module";
+import { Component, input } from "@angular/core";
+import { AppButtonDirective } from "../../../shared/app-button/app-button.directive";
 
 @Component({
   selector: "app-todo-item",
   templateUrl: "./todo-item.component.html",
-  styleUrls: ["./todo-item.component.scss"],
+  styleUrl: "./todo-item.component.scss",
   imports: [
-    SharedModule
+    AppButtonDirective
   ],
 })
 export class TodoItemComponent {
-  @Input() label = "";
+  label = input("");
 
   deleteItem() {
-    console.log("delete", this.label);
+    console.log("delete", this.label());
   }
 }

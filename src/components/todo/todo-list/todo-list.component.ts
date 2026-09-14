@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
-import { SharedModule } from "../../../shared/shared.module";
+import { AppButtonDirective } from "../../../shared/app-button/app-button.directive";
+import { AppInputDirective } from "../../../shared/app-input/app-input.directive";
 import { TodoItemComponent } from "../todo-item/todo-item.component";
 
 @Component({
   selector: "app-todo-list",
   templateUrl: "./todo-list.component.html",
-  styleUrls: ["./todo-list.component.scss"],
-  imports: [SharedModule, TodoItemComponent],
+  styleUrl: "./todo-list.component.scss",
+  imports: [AppButtonDirective, AppInputDirective, TodoItemComponent],
 })
 export class TodoListComponent {
 
