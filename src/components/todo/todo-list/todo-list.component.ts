@@ -31,9 +31,6 @@ export class TodoListComponent {
 
   addItem() {
     const text = this.newTodoText.trim();
-    if (!text) {
-      return;
-    }
     const maxId = Math.max(0, ...this.items().map((item) => item.id));
     this.items.update((items) => [...items, { id: maxId + 1, text }]);
     this.newTodoText = "";
