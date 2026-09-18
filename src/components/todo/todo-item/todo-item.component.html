@@ -1,10 +1,5 @@
 @let todoItem = item();
 <div class="todo-item">
   {{ todoItem.text }}
-  <button
-    class="button button--delete"
-    type="button"
-    (click)="deleteItem.emit(todoItem.id)">
-    Delete
-  </button>
+  <app-button title="Delete" (click)="deleteItem.emit(todoItem.id)" class="button--delete"></app-button>
 </div>
