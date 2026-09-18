@@ -4,13 +4,20 @@
     <div class="spinner"></div>
   } @else {
     @for (item of items(); track item.id) {
-      <app-todo-item [item]="item" (deleteItem)="deleteItem($event)"></app-todo-item>
+      <app-todo-item [item]="item" (deleteItem)="deleteItem($event)" (showDescription)="showDescription($event)" [selectedItemId]="selectedItemId()"></app-todo-item>
     }
     <div class="todo-list__add-item">
+      <div class="todo-list__add-item__fields">
       <mat-form-field class="todo-list__input">
-        <input matInput placeholder="Add your new todo" [(ngModel)]="newTodoText" />
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Add your new todo title" [(ngModel)]="newTodoText" /> 
       </mat-form-field>
-      <app-button title="Add task" (click)="addItem()"></app-button>
+      <mat-form-field class="todo-list__input">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Add your new todo description" [(ngModel)]="newTodoDescription"></textarea>
+      </mat-form-field>
+      </div>
+      <app-button title="Add task" (click)="addItem()" appTooltip="Добавить задачу"></app-button>
     </div>
   }
 </div>
