@@ -1,8 +1,27 @@
 .todo-item {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  background-color: lightgray;
-  padding: 8px 12px;
-  border-radius: 4px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightgray;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+
+    .--selected {
+      background-color: lightgreen;
+    }
+  }
+
+  &__row {
+    display: flex;
+    gap: 8px;
+  }
 }
+
+
