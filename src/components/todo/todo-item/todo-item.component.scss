@@ -12,6 +12,10 @@
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
+
+    .--selected {
+      background-color: lightgreen;
+    }
   }
 
   &__row {
@@ -20,6 +24,4 @@
   }
 }
 
-.selected {
-  background-color: lightgreen;
-}
+

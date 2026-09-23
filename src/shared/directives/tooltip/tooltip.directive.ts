@@ -23,7 +23,9 @@ export class TooltipDirective implements OnDestroy {
     this.renderer.setProperty(tooltip, "textContent", this.appTooltip());
     this.renderer.appendChild(document.body, tooltip);
 
-    this.position(tooltip);
+    requestAnimationFrame(() => {
+      this.position(tooltip);
+    });
     this.tooltipElement = tooltip;
   }
 
