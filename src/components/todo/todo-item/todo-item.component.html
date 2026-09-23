@@ -8,13 +8,25 @@
     (click)="showDescription.emit(todoItem.id)"
     (keydown.enter)="showDescription.emit(todoItem.id)"
     [class.todo-item__item--selected]="selectedItemId() === item().id"
+    (dblclick)="isEditing.set(true)"
   >
     <div class="todo-item__row">
-      <span>{{ todoItem.text }}</span>
-      @if(selectedItemId() === todoItem.id) {   
+      @if(isEditing()) {
+        <mat-form-field class="todo-list__input">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Add your new todo title" [(ngModel)]="newTodoText" /> 
+        </mat-form-field>
+      } @else {
+        <span>{{ todoItem.text }}</span>
+      }
+      @if(selectedItemId() === todoItem.id && !isEditing()) {
         <span>{{ todoItem.description }}</span>
       }
     </div>
   </div>
-  <app-button class="todo-item_btn button--delete" title="Delete" (click)="deleteItem.emit(todoItem.id)" appTooltip="Завершил задачу"></app-button>
+  @if(isEditing()) {
+    <app-button class="todo-item_btn button--save" title="Save" (click)="updateItem()" appTooltip="Сохранить изменения"></app-button>
+  } @else {
+    <app-button class="todo-item_btn button--delete" title="Delete" (click)="deleteItem.emit(todoItem.id)" appTooltip="Завершил задачу"></app-button>    
+  }
 </div>

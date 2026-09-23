@@ -1,0 +1,5 @@
+<div class="toasts">
+  @for (toast of toastService.toasts(); track $index) {
+    <div class="toast" (dblclick)="toastService.hideToast($index)">{{ toast }}</div>
+  }
+</div>
