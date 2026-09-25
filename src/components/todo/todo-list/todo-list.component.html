@@ -3,7 +3,7 @@
   @if (isLoading()) {
     <div class="spinner"></div>
   } @else {
-    @for (item of items(); track item.id) {
+    @for (item of items; track item.id) {
       <app-todo-item [item]="item" (deleteItem)="deleteItem($event)" (showDescription)="showDescription($event)" [selectedItemId]="selectedItemId()"></app-todo-item>
     }
     <div class="todo-list__add-item">
