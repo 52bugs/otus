@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal } from "@angular/core";
+import { Component, inject, input, linkedSignal, output, signal } from "@angular/core";
 import { TodoItem } from "../../../models/todo-item.interface";
 import { SharedModule } from "../../../shared/shared.module";
 import { CommonModule } from "@angular/common";
@@ -28,10 +28,10 @@ export class ToDoListItemComponent {
 
   isEditing = signal(false);
 
-  newTodoText = "";
+  newTodoText = linkedSignal(() => this.item().text);
 
   updateItem() {
-    this.todoListService.updateItem(this.item().id, this.newTodoText);
+    this.todoListService.updateItem(this.item().id, this.newTodoText());
     this.toastService.showToast("Task updated");
     this.isEditing.set(false);
   }

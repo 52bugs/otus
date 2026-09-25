@@ -16,7 +16,7 @@ import { ToastService } from "../../../shared/components/toast/toast.service";
 })
 export class TodoListComponent implements OnInit {
 
-  protected readonly todoListService = inject(TodoListService);
+  private readonly todoListService = inject(TodoListService);
 
   private readonly toastService = inject(ToastService);
 
@@ -31,6 +31,10 @@ export class TodoListComponent implements OnInit {
     setTimeout(() => {
       this.isLoading.set(false);
     }, 500);
+  }
+
+  get items() {
+    return this.todoListService.items();
   }
 
   addItem() {
