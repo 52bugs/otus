@@ -1,5 +1,5 @@
 import { Component, inject, input, linkedSignal, output, signal } from "@angular/core";
-import { TodoItem } from "../../../models/todo-item.interface";
+import { TodoItem, TodoItemStatus } from "../../../models/todo-item.interface";
 import { SharedModule } from "../../../shared/shared.module";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
@@ -21,18 +21,25 @@ export class ToDoListItemComponent {
   private toastService = inject(ToastService)
 
   item = input.required<TodoItem>();
-  selectedItemId = input.required<number | null>();
-  deleteItem = output<number>();
+  selectedItemId = input.required<string | null>();
+  deleteItem = output<string>();
 
-  showDescription = output<number>();
+  showDescription = output<string>();
 
   isEditing = signal(false);
 
   newTodoText = linkedSignal(() => this.item().text);
 
-  updateItem() {
-    this.todoListService.updateItem(this.item().id, this.newTodoText());
-    this.toastService.showToast("Task updated");
-    this.isEditing.set(false);
+  updateItemText() {
+    this.todoListService.updateItemText(this.item().id, this.newTodoText()).subscribe(() => {
+      this.toastService.showToast("Task updated");
+      this.isEditing.set(false);
+    });
   }
+
+  updateItemStatus() {
+    this.todoListService.updateItemStatus(this.item().id, TodoItemStatus.COMPLETED).subscribe();
+  }
+
+  TodoItemStatus = TodoItemStatus;
 }

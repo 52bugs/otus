@@ -11,6 +11,8 @@
     (dblclick)="isEditing.set(true)"
   >
     <div class="todo-item__row">
+      <input type="checkbox" [checked]="todoItem.status === TodoItemStatus.COMPLETED" [disabled]="todoItem.status === TodoItemStatus.COMPLETED" (click)="updateItemStatus()"/>
+      {{ todoItem.status }}
       @if(isEditing()) {
         <mat-form-field class="todo-list__input">
           <mat-label>Title</mat-label>
@@ -25,7 +27,7 @@
     </div>
   </div>
   @if(isEditing()) {
-    <app-button class="todo-item_btn button--save" title="Save" (click)="updateItem()" appTooltip="Сохранить изменения"></app-button>
+    <app-button class="todo-item_btn button--save" title="Save" (click)="updateItemText()" appTooltip="Сохранить изменения"></app-button>
   } @else {
     <app-button class="todo-item_btn button--delete" title="Delete" (click)="deleteItem.emit(todoItem.id)" appTooltip="Завершил задачу"></app-button>    
   }

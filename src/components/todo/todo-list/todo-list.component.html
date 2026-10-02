@@ -1,23 +1,21 @@
 <div class="todo-list">
   <h1>Todo list</h1>
   @if (isLoading()) {
-    <div class="spinner"></div>
+    <app-pre-loader></app-pre-loader> 
   } @else {
+    <div class="todo-list__filter">
+      <mat-form-field class="todo-list__filter__select" subscriptSizing="dynamic">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="statusFilter">
+          @for (option of statusOptions; track option.label) {
+            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
     @for (item of items; track item.id) {
       <app-todo-item [item]="item" (deleteItem)="deleteItem($event)" (showDescription)="showDescription($event)" [selectedItemId]="selectedItemId()"></app-todo-item>
     }
-    <div class="todo-list__add-item">
-      <div class="todo-list__add-item__fields">
-      <mat-form-field class="todo-list__input">
-        <mat-label>Title</mat-label>
-        <input matInput placeholder="Add your new todo title" [(ngModel)]="newTodoText" /> 
-      </mat-form-field>
-      <mat-form-field class="todo-list__input">
-        <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Add your new todo description" [(ngModel)]="newTodoDescription"></textarea>
-      </mat-form-field>
-      </div>
-      <app-button title="Add task" (click)="addItem()" appTooltip="Добавить задачу"></app-button>
-    </div>
+    <app-todo-item-create></app-todo-item-create>
   }
 </div>

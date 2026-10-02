@@ -1,0 +1,13 @@
+<div class="todo-item-create">
+  <div class="todo-item-create__fields">
+    <mat-form-field class="todo-item-create__input">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Add your new todo title" [formControl]="form.controls.title" />
+    </mat-form-field>
+    <mat-form-field class="todo-item-create__input">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Add your new todo description" [formControl]="form.controls.description"></textarea>
+    </mat-form-field>
+  </div>
+  <app-button title="Add task" (click)="onSubmit()" appTooltip="Добавить задачу"></app-button>
+</div>

@@ -2,17 +2,20 @@ import { Component, inject, OnInit, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
 import { ToDoListItemComponent } from "../todo-item/todo-item.component";
+import { TodoItemCreateComponent } from "../todo-item-create/todo-item-create.component";
 import { SharedModule } from "../../../shared/shared.module";
 import { CommonModule } from "@angular/common";
 import { TodoListService } from "../todo-list.service";
 import { ToastService } from "../../../shared/components/toast/toast.service";
+import { TodoItemStatus } from "../../../models/todo-item.interface";
 
 @Component({
   selector: "app-todo-list",
   templateUrl: "./todo-list.component.html",
   styleUrl: "./todo-list.component.scss",
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ToDoListItemComponent, SharedModule, CommonModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ToDoListItemComponent, TodoItemCreateComponent, SharedModule, CommonModule],
 })
 export class TodoListComponent implements OnInit {
 
@@ -22,45 +25,43 @@ export class TodoListComponent implements OnInit {
 
   isLoading = signal(true);
 
-  selectedItemId = signal<number | null>(null);
+  selectedItemId = signal<string | null>(null);
 
-  newTodoText = "";
-  newTodoDescription = "";
+  statusFilter = signal<TodoItemStatus | null>(null);
+
+  readonly statusOptions: { value: TodoItemStatus | null; label: string }[] = [
+    { value: null, label: "ALL" },
+    { value: TodoItemStatus.IN_PROGRESS, label: "IN_PROGRESS" },
+    { value: TodoItemStatus.COMPLETED, label: "COMPLETED" },
+  ];
 
   ngOnInit() {
-    setTimeout(() => {
-      this.isLoading.set(false);
-    }, 500);
+    this.todoListService.getItems().subscribe({
+      next: () => this.isLoading.set(false),
+      error: () => this.isLoading.set(false),
+    });
   }
 
   get items() {
-    return this.todoListService.items();
-  }
-
-  addItem() {
-    const text = this.newTodoText.trim();
-    const description = this.newTodoDescription.trim();
-
-    if (!text) {
-      return;
+    const filter = this.statusFilter();
+    const allItems = this.todoListService.items();
+    if (filter === null) {
+      return allItems;
     }
-    
-    this.todoListService.addItem(text, description);
-    this.toastService.showToast("Task added");
-    this.newTodoText = "";
-    this.newTodoDescription = "";
+    return allItems.filter((item) => item.status === filter);
   }
 
-  deleteItem(id: number) {
-    this.todoListService.deleteItem(id);
-    this.toastService.showToast("Task deleted");
-    if (this.selectedItemId() === id) {
-      this.selectedItemId.set(null);
-    }
+  deleteItem(id: string) {
+    this.todoListService.deleteItem(id).subscribe(() => {
+      this.toastService.showToast("Task deleted");
+      if (this.selectedItemId() === id) {
+        this.selectedItemId.set(null);
+      }
+    });
   }
 
 
-  showDescription(id: number) {
+  showDescription(id: string) {
     if (this.selectedItemId() === id) {
       this.selectedItemId.set(null);
       return;
