@@ -21,7 +21,6 @@ export class ToDoListItemComponent {
   private toastService = inject(ToastService)
 
   item = input.required<TodoItem>();
-  selectedItemId = input.required<string | null>();
   deleteItem = output<string>();
 
   showDescription = output<string>();

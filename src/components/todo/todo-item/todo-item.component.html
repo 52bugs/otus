@@ -7,7 +7,6 @@
     tabindex="0"
     (click)="showDescription.emit(todoItem.id)"
     (keydown.enter)="showDescription.emit(todoItem.id)"
-    [class.todo-item__item--selected]="selectedItemId() === item().id"
     (dblclick)="isEditing.set(true)"
   >
     <div class="todo-item__row">
@@ -20,9 +19,6 @@
         </mat-form-field>
       } @else {
         <span>{{ todoItem.text }}</span>
-      }
-      @if(selectedItemId() === todoItem.id && !isEditing()) {
-        <span>{{ todoItem.description }}</span>
       }
     </div>
   </div>

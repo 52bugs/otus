@@ -13,9 +13,10 @@
         </mat-select>
       </mat-form-field>
     </div>
-    @for (item of items; track item.id) {
-      <app-todo-item [item]="item" (deleteItem)="deleteItem($event)" (showDescription)="showDescription($event)" [selectedItemId]="selectedItemId()"></app-todo-item>
+    @for (item of items(); track item.id) {
+      <app-todo-item [item]="item" (deleteItem)="deleteItem($event)" (showDescription)="showDescription($event)"></app-todo-item>
     }
     <app-todo-item-create></app-todo-item-create>
   }
+  <router-outlet />
 </div>
