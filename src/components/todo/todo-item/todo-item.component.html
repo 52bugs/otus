@@ -7,8 +7,8 @@
     tabindex="0"
     (click)="showDescription.emit(todoItem.id)"
     (keydown.enter)="showDescription.emit(todoItem.id)"
-    [class.todo-item__item--selected]="selectedItemId() === item().id"
     (dblclick)="isEditing.set(true)"
+    [class.todo-item__item--selected]="selectedItemId() === item().id"
   >
     <div class="todo-item__row">
       <input type="checkbox" [checked]="todoItem.status === TodoItemStatus.COMPLETED" [disabled]="todoItem.status === TodoItemStatus.COMPLETED" (click)="updateItemStatus()"/>
@@ -20,9 +20,6 @@
         </mat-form-field>
       } @else {
         <span>{{ todoItem.text }}</span>
-      }
-      @if(selectedItemId() === todoItem.id && !isEditing()) {
-        <span>{{ todoItem.description }}</span>
       }
     </div>
   </div>

@@ -13,7 +13,7 @@
     cursor: pointer;
     width: 100%;
 
-    .--selected {
+    &--selected {
       background-color: lightgreen;
     }
   }

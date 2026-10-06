@@ -11,6 +11,12 @@
       "description": "456",
       "status": "COMPLETED",
       "id": "qI-8XrBQz18"
+    },
+    {
+      "text": "тестовая задача",
+      "description": "тестовое описание",
+      "status": "COMPLETED",
+      "id": "dqSBxbT3X-Y"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
