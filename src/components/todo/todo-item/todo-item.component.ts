@@ -21,6 +21,7 @@ export class ToDoListItemComponent {
   private toastService = inject(ToastService)
 
   item = input.required<TodoItem>();
+  
   deleteItem = output<string>();
 
   showDescription = output<string>();
@@ -28,6 +29,8 @@ export class ToDoListItemComponent {
   isEditing = signal(false);
 
   newTodoText = linkedSignal(() => this.item().text);
+
+  selectedItemId = input.required<string | null>();
 
   updateItemText() {
     this.todoListService.updateItemText(this.item().id, this.newTodoText()).subscribe(() => {

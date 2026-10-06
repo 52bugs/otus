@@ -32,6 +32,8 @@ export class TodoListComponent implements OnInit {
 
   isLoading = signal(true);
 
+  selectedItemId = signal<string | null>(null);
+
   private readonly routeId = toSignal(
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
@@ -73,9 +75,10 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-
   showDescription(id: string) {
+    this.selectedItemId.set(id);
     if (this.routeId() === id) {
+      this.selectedItemId.set(null);
       this.router.navigate(["/tasks"]);
       return;
     }

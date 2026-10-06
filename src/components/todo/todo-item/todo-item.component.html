@@ -8,6 +8,7 @@
     (click)="showDescription.emit(todoItem.id)"
     (keydown.enter)="showDescription.emit(todoItem.id)"
     (dblclick)="isEditing.set(true)"
+    [class.todo-item__item--selected]="selectedItemId() === item().id"
   >
     <div class="todo-item__row">
       <input type="checkbox" [checked]="todoItem.status === TodoItemStatus.COMPLETED" [disabled]="todoItem.status === TodoItemStatus.COMPLETED" (click)="updateItemStatus()"/>
