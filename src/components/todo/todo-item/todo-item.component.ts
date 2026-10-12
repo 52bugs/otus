@@ -40,7 +40,8 @@ export class ToDoListItemComponent {
   }
 
   updateItemStatus() {
-    this.todoListService.updateItemStatus(this.item().id, TodoItemStatus.COMPLETED).subscribe();
+    const nextStatus = this.item().status === TodoItemStatus.COMPLETED ? TodoItemStatus.TODO : TodoItemStatus.COMPLETED;
+    this.todoListService.updateItemStatus(this.item().id, nextStatus).subscribe();
   }
 
   TodoItemStatus = TodoItemStatus;

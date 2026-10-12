@@ -1,0 +1,29 @@
+.todo-item-create-dialog {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 16px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__close {
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    color: #616161;
+
+    &:hover {
+      color: #212121;
+    }
+  }
+
+  &__content {
+    min-width: 420px;
+  }
+}

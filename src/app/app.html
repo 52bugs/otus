@@ -1,2 +1,21 @@
-<router-outlet />
-<app-toast />
+<div class="app">
+  <header class="app__header">
+    <span class="app__logo">{{ title }}</span>
+    <div class="app__header-right">
+      <span class="app__section">{{ sectionName() }}</span>
+      @if (isBacklog()) {
+        <button type="button" class="app__add-task-button" (click)="openCreateTaskModal()">+ Add task</button>
+      }
+    </div>
+  </header>
+  <div class="app__body">
+    <nav class="app__menu">
+      <a class="app__menu-link" routerLink="/backlog" routerLinkActive="app__menu-link--active">Backlog</a>
+      <a class="app__menu-link" routerLink="/board" routerLinkActive="app__menu-link--active">Board</a>
+    </nav>
+    <main class="app__content">
+      <router-outlet />
+    </main>
+  </div>
+  <app-toast />
+</div>

@@ -1,6 +1,7 @@
 @if (item(); as todoItem) {
   <div class="todo-item-view">
-    <span class="todo-item-view__description">{{ todoItem.description }}</span>
+    <h2 class="todo-item-view__title">Title: {{ todoItem.text }}</h2>
+    <span class="todo-item-view__description">Description: {{ todoItem.description }}</span>
   </div>
 } @else {
   <span>Task not found</span>

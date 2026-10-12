@@ -1,0 +1,12 @@
+<div class="backlog-page">
+  <div class="backlog-page__list">
+    <app-todo-list />
+  </div>
+  <div class="backlog-page__details">
+    @if (hasSelectedTask()) {
+      <router-outlet />
+    } @else {
+      <div class="backlog-page__placeholder">Select a task to view details</div>
+    }
+  </div>
+</div>

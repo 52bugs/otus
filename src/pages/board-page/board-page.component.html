@@ -1,0 +1,54 @@
+<div class="board-page">
+  @if (isLoading()) {
+    <app-pre-loader></app-pre-loader>
+  } @else {
+    @for (column of columns; track column.status) {
+      <section class="board-page__column">
+        <header class="board-page__column-header">
+          <span class="board-page__column-title">{{ column.title }}</span>
+          <span class="board-page__column-count">{{ columnCount(column.status) }}</span>
+        </header>
+        <div class="board-page__column-body">
+          @for (item of columnItems(column.status); track item.id) {
+            <article
+              class="board-page__card"
+              role="button"
+              tabindex="0"
+              (dblclick)="openTask(item.id)"
+              (keydown.enter)="openTask(item.id)"
+            >
+              <div class="board-page__card-title">{{ item.text }}</div>
+              @if (item.description) {
+                <div class="board-page__card-description">{{ item.description }}</div>
+              }
+              <div class="board-page__card-actions">
+                @if (column.prev; as prevStatus) {
+                  <button
+                    type="button"
+                    class="board-page__card-arrow"
+                    title="Move back"
+                    (click)="moveStatus(item, prevStatus, $event)"
+                  >
+                    &larr;
+                  </button>
+                }
+                @if (column.next; as nextStatus) {
+                  <button
+                    type="button"
+                    class="board-page__card-arrow"
+                    title="Move forward"
+                    (click)="moveStatus(item, nextStatus, $event)"
+                  >
+                    &rarr;
+                  </button>
+                }
+              </div>                
+            </article>
+          } @empty {
+            <span class="board-page__empty">No tasks</span>
+          }
+        </div>
+      </section>
+    }
+  }
+</div>

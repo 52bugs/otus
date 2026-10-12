@@ -20,7 +20,7 @@ export class TodoListService {
   }
 
   addItem(text: string, description: string): Observable<TodoItem> {
-    const body = { text, description, status: TodoItemStatus.IN_PROGRESS };
+    const body = { text, description, status: TodoItemStatus.TODO };
 
     return this.http.post<TodoItem>(API_URL, body).pipe(
       tap((item) => this._items.update((items) => [...items, item])),

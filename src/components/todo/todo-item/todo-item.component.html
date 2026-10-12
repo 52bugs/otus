@@ -11,7 +11,6 @@
     [class.todo-item__item--selected]="selectedItemId() === item().id"
   >
     <div class="todo-item__row">
-      <input type="checkbox" [checked]="todoItem.status === TodoItemStatus.COMPLETED" [disabled]="todoItem.status === TodoItemStatus.COMPLETED" (click)="updateItemStatus()"/>
       {{ todoItem.status }}
       @if(isEditing()) {
         <mat-form-field class="todo-list__input">
