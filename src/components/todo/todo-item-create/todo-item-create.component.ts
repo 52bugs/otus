@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, output } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -19,6 +19,8 @@ export class TodoItemCreateComponent {
 
   private readonly toastService = inject(ToastService);
 
+  readonly created = output<void>();
+
   readonly form = createTodoItemCreateForm();
 
   onSubmit() {
@@ -37,6 +39,7 @@ export class TodoItemCreateComponent {
     this.todoListService.addItem(text, description.trim()).subscribe(() => {
       this.toastService.showToast("Task added");
       this.form.reset();
+      this.created.emit();
     });
   }
 }

@@ -3,7 +3,7 @@
     {
       "text": "title",
       "description": "desc",
-      "status": "COMPLETED",
+      "status": "IN_PROGRESS",
       "id": "g_f7r2xLJsk"
     },
     {
@@ -15,8 +15,38 @@
     {
       "text": "тестовая задача",
       "description": "тестовое описание",
-      "status": "COMPLETED",
+      "status": "TODO",
       "id": "dqSBxbT3X-Y"
+    },
+    {
+      "text": "title",
+      "description": "desc",
+      "status": "COMPLETED",
+      "id": "r_f7r2xLJsk"
+    },
+    {
+      "text": "123",
+      "description": "456",
+      "status": "TODO",
+      "id": "q1-8XrBQz18"
+    },
+    {
+      "text": "тестовая задача",
+      "description": "тестовое описание",
+      "status": "TODO",
+      "id": "bqSBxbT3X-Y"
+    },
+    {
+      "text": "новая задача",
+      "description": "новое описание для новой задачи",
+      "status": "TODO",
+      "id": "xUCOg-v4-9o"
+    },
+    {
+      "text": "some task",
+      "description": "some task description",
+      "status": "TODO",
+      "id": "8XoWd9WhSPY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,16 +1,17 @@
 import { Routes } from "@angular/router";
 import { ToDoItemViewComponent } from "../components/todo/todo-item-view/todo-item-view.component";
-import { TodoListComponent } from "../components/todo/todo-list/todo-list.component";
+import { BacklogPageComponent } from "../pages/backlog-page/backlog-page.component";
+import { BoardPageComponent } from "../pages/board-page/board-page.component";
 
 export const routes: Routes = [
   {
     path: "",
-    redirectTo: "tasks",
+    redirectTo: "backlog",
     pathMatch: "full",
   },
   {
-    path: "tasks",
-    component: TodoListComponent,
+    path: "backlog",
+    component: BacklogPageComponent,
     children: [
       {
         path: ":id",
@@ -19,7 +20,11 @@ export const routes: Routes = [
     ],
   },
   {
+    path: "board",
+    component: BoardPageComponent,
+  },
+  {
     path: "**",
-    redirectTo: "tasks",
+    redirectTo: "backlog",
   },
 ];
