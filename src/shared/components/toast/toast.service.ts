@@ -1,16 +1,17 @@
-import { Service, signal } from "@angular/core";
+import { Service } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Service()
 export class ToastService {
-  private readonly _toasts = signal<string[]>([]);
+  private readonly _toasts$ = new BehaviorSubject<string[]>([]);
 
-  readonly toasts = this._toasts.asReadonly();
+  readonly toasts$ = this._toasts$.asObservable();
 
   showToast(message: string) {
-    this._toasts.update((toasts) => [...toasts, message]);
+    this._toasts$.next([...this._toasts$.value, message]);
   }
 
   hideToast(index: number) {
-    this._toasts.update((toasts) => toasts.filter((_, i) => i !== index));
+    this._toasts$.next(this._toasts$.value.filter((_, i) => i !== index));
   }
 }

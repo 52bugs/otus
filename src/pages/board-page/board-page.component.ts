@@ -1,9 +1,11 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
 import { Router } from "@angular/router";
 import { TodoItem, TodoItemStatus } from "../../models/todo-item.interface";
 import { TodoListService } from "../../components/todo/todo-list.service";
 import { ToastService } from "../../shared/components/toast/toast.service";
 import { SharedModule } from "../../shared/shared.module";
+import { finalize } from "rxjs";
 
 interface BoardColumn {
   status: TodoItemStatus;
@@ -28,6 +30,8 @@ export class BoardPageComponent implements OnInit {
 
   protected readonly isLoading = signal(true);
 
+  private readonly items = toSignal(this.todoListService.items$, { initialValue: [] });
+
   protected readonly columns: BoardColumn[] = [
     { status: TodoItemStatus.TODO, title: "TODO", prev: null, next: TodoItemStatus.IN_PROGRESS },
     { status: TodoItemStatus.IN_PROGRESS, title: "IN PROGRESS", prev: TodoItemStatus.TODO, next: TodoItemStatus.COMPLETED },
@@ -35,14 +39,11 @@ export class BoardPageComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.todoListService.getItems().subscribe({
-      next: () => this.isLoading.set(false),
-      error: () => this.isLoading.set(false),
-    });
+    this.todoListService.getItems().pipe(finalize(() => this.isLoading.set(false))).subscribe();
   }
 
   protected columnItems(status: TodoItemStatus): TodoItem[] {
-    return this.todoListService.items().filter((item) => item.status === status);
+    return this.items().filter((item) => item.status === status);
   }
 
   protected columnCount(status: TodoItemStatus): number {

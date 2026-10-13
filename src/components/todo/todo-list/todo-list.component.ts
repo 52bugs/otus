@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -10,7 +10,7 @@ import { SharedModule } from "../../../shared/shared.module";
 import { TodoListService } from "../todo-list.service";
 import { ToastService } from "../../../shared/components/toast/toast.service";
 import { TodoItemStatus } from "../../../models/todo-item.interface";
-import { filter, map } from "rxjs";
+import { BehaviorSubject, combineLatest, filter, map } from "rxjs";
 
 @Component({
   selector: "app-todo-list",
@@ -38,7 +38,9 @@ export class TodoListComponent implements OnInit {
     { initialValue: this.route.snapshot.firstChild?.paramMap.get("id") ?? null },
   );
 
-  statusFilter = signal<TodoItemStatus | null>(null);
+  protected readonly statusFilter$ = new BehaviorSubject<TodoItemStatus | null>(null);
+
+  protected readonly statusFilter = toSignal(this.statusFilter$, { initialValue: null });
 
   readonly statusOptions: { value: TodoItemStatus | null; label: string }[] = [
     { value: null, label: "ALL" },
@@ -54,14 +56,17 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  protected items = computed(() => {
-    const filter = this.statusFilter();
-    const allItems = this.todoListService.items();
-    if (filter === null) {
-      return allItems;
-    }
-    return allItems.filter((item) => item.status === filter);    
-  })
+  protected readonly items = toSignal(
+    combineLatest([
+      this.todoListService.items$, 
+      this.statusFilter$,
+    ]).pipe(
+      map(([items, statusFilter]) =>
+        statusFilter === null ? items : items.filter((item) => item.status === statusFilter),
+      ),
+    ),
+    { initialValue: [] },
+  );
 
   deleteItem(id: string) {
     this.todoListService.deleteItem(id).subscribe(() => {

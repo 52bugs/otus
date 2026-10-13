@@ -3,31 +3,13 @@
     {
       "text": "title",
       "description": "desc",
-      "status": "IN_PROGRESS",
-      "id": "g_f7r2xLJsk"
-    },
-    {
-      "text": "123",
-      "description": "456",
-      "status": "COMPLETED",
-      "id": "qI-8XrBQz18"
-    },
-    {
-      "text": "тестовая задача",
-      "description": "тестовое описание",
-      "status": "TODO",
-      "id": "dqSBxbT3X-Y"
-    },
-    {
-      "text": "title",
-      "description": "desc",
       "status": "COMPLETED",
       "id": "r_f7r2xLJsk"
     },
     {
       "text": "123",
       "description": "456",
-      "status": "TODO",
+      "status": "IN_PROGRESS",
       "id": "q1-8XrBQz18"
     },
     {
@@ -47,6 +29,12 @@
       "description": "some task description",
       "status": "TODO",
       "id": "8XoWd9WhSPY"
+    },
+    {
+      "text": "sometask2",
+      "description": "someraskdescription2",
+      "status": "TODO",
+      "id": "olzHDousesM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

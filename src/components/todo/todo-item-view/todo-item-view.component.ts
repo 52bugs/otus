@@ -1,4 +1,5 @@
 import { Component, computed, inject, input } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { TodoItemStatus } from "../../../models/todo-item.interface";
@@ -14,6 +15,8 @@ export class ToDoItemViewComponent {
 
   private readonly todoListService = inject(TodoListService);
 
+  private readonly items = toSignal(this.todoListService.items$, { initialValue: [] });
+
   readonly id = input<string>();
 
   readonly item = computed(() => {
@@ -21,7 +24,7 @@ export class ToDoItemViewComponent {
     if (!id) {
       return null;
     }
-    return this.todoListService.items().find((item) => item.id === id) ?? null;
+    return this.items().find((item) => item.id === id) ?? null;
   });
 
   readonly statusOptions: TodoItemStatus[] = [TodoItemStatus.IN_PROGRESS, TodoItemStatus.COMPLETED];
