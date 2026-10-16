@@ -1,6 +1,7 @@
 import { Component, computed, inject, OnInit, signal } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { Router } from "@angular/router";
+import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { TodoItem, TodoItemStatus } from "../../models/todo-item.interface";
 import { TodoListService } from "../../components/todo/todo-list.service";
 import { ToastService } from "../../shared/components/toast/toast.service";
@@ -9,7 +10,7 @@ import { finalize } from "rxjs";
 
 interface BoardColumn {
   status: TodoItemStatus;
-  title: string;
+  titleKey: string;
   prev: TodoItemStatus | null;
   next: TodoItemStatus | null;
 }
@@ -18,7 +19,7 @@ interface BoardColumn {
   selector: "app-board-page",
   templateUrl: "./board-page.component.html",
   styleUrl: "./board-page.component.scss",
-  imports: [SharedModule],
+  imports: [SharedModule, TranslatePipe],
 })
 export class BoardPageComponent implements OnInit {
 
@@ -27,6 +28,8 @@ export class BoardPageComponent implements OnInit {
   private readonly toastService = inject(ToastService);
 
   private readonly router = inject(Router);
+
+  private readonly translate = inject(TranslateService);
 
   protected readonly isLoading = signal(true);
 
@@ -42,9 +45,9 @@ export class BoardPageComponent implements OnInit {
   });
 
   protected readonly columns: BoardColumn[] = [
-    { status: TodoItemStatus.TODO, title: "TODO", prev: null, next: TodoItemStatus.IN_PROGRESS },
-    { status: TodoItemStatus.IN_PROGRESS, title: "IN PROGRESS", prev: TodoItemStatus.TODO, next: TodoItemStatus.COMPLETED },
-    { status: TodoItemStatus.COMPLETED, title: "DONE", prev: null, next: null },
+    { status: TodoItemStatus.TODO, titleKey: "board.columns.todo", prev: null, next: TodoItemStatus.IN_PROGRESS },
+    { status: TodoItemStatus.IN_PROGRESS, titleKey: "board.columns.inProgress", prev: TodoItemStatus.TODO, next: TodoItemStatus.COMPLETED },
+    { status: TodoItemStatus.COMPLETED, titleKey: "board.columns.done", prev: null, next: null },
   ];
 
   ngOnInit(): void {
@@ -58,7 +61,17 @@ export class BoardPageComponent implements OnInit {
   protected moveStatus(item: TodoItem, status: TodoItemStatus, event: MouseEvent): void {
     event.stopPropagation();
     this.todoListService.updateItemStatus(item.id, status).subscribe(() => {
-      this.toastService.showToast(`Task moved to ${status}`);
+      const statusLabel = this.getStatusLabel(status);
+      this.toastService.showToast(this.translate.instant('board.taskMoved', { status: statusLabel }));
     });
+  }
+
+  private getStatusLabel(status: TodoItemStatus): string {
+    const statusMap: Record<TodoItemStatus, string> = {
+      [TodoItemStatus.TODO]: 'status.todo',
+      [TodoItemStatus.IN_PROGRESS]: 'status.inProgress',
+      [TodoItemStatus.COMPLETED]: 'status.completed',
+    };
+    return this.translate.instant(statusMap[status]);
   }
 }

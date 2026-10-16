@@ -1,17 +1,29 @@
 <div class="app">
   <header class="app__header">
-    <span class="app__logo">{{ title }}</span>
+    <span class="app__logo">{{ 'app.title' | translate }}</span>
     <div class="app__header-right">
-      <span class="app__section">{{ sectionName() }}</span>
+      <span class="app__section">{{ 'app.section.' + sectionKey() | translate }}</span>
       @if (isBacklog()) {
-        <button type="button" class="app__add-task-button" (click)="openCreateTaskModal()">+ Add task</button>
+        <button type="button" class="app__add-task-button" (click)="openCreateTaskModal()">{{ 'app.addTask' | translate }}</button>
       }
+      <div class="app__lang-switcher">
+        @for (lang of languageService.availableLanguages; track lang.code) {
+          <button
+            type="button"
+            class="app__lang-btn"
+            [class.app__lang-btn--active]="languageService.currentLanguage() === lang.code"
+            (click)="languageService.switchLanguage(lang.code)"
+          >
+            {{ lang.name }}
+          </button>
+        }
+      </div>
     </div>
   </header>
   <div class="app__body">
     <nav class="app__menu">
-      <a class="app__menu-link" routerLink="/backlog" routerLinkActive="app__menu-link--active">Backlog</a>
-      <a class="app__menu-link" routerLink="/board" routerLinkActive="app__menu-link--active">Board</a>
+      <a class="app__menu-link" routerLink="/backlog" routerLinkActive="app__menu-link--active">{{ 'app.section.backlog' | translate }}</a>
+      <a class="app__menu-link" routerLink="/board" routerLinkActive="app__menu-link--active">{{ 'app.section.board' | translate }}</a>
     </nav>
     <main class="app__content">
       <router-outlet />

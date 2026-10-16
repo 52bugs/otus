@@ -1,14 +1,14 @@
 <div class="todo-list">
-  <h1>Todo list</h1>
+  <h1>{{ 'backlog.title' | translate }}</h1>
   @if (isLoading()) {
     <app-pre-loader></app-pre-loader> 
   } @else {
     <div class="todo-list__filter">
       <mat-form-field class="todo-list__filter__select" subscriptSizing="dynamic">
-        <mat-label>Status</mat-label>
+        <mat-label>{{ 'todo.status' | translate }}</mat-label>
         <mat-select [ngModel]="statusFilter()" (ngModelChange)="statusFilter$.next($event)">
-          @for (option of statusOptions; track option.label) {
-            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          @for (option of statusOptions; track option.labelKey) {
+            <mat-option [value]="option.value">{{ option.labelKey | translate }}</mat-option>
           }
         </mat-select>
       </mat-form-field>

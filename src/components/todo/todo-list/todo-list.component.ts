@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
+import { TranslatePipe, TranslateService } from "@ngx-translate/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { ToDoListItemComponent } from "../todo-item/todo-item.component";
 import { SharedModule } from "../../../shared/shared.module";
@@ -16,7 +17,7 @@ import { BehaviorSubject, combineLatest, filter, map } from "rxjs";
   selector: "app-todo-list",
   templateUrl: "./todo-list.component.html",
   styleUrl: "./todo-list.component.scss",
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ToDoListItemComponent, SharedModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ToDoListItemComponent, SharedModule, TranslatePipe],
 })
 export class TodoListComponent implements OnInit {
 
@@ -27,6 +28,8 @@ export class TodoListComponent implements OnInit {
   private readonly router = inject(Router);
 
   private readonly route = inject(ActivatedRoute);
+
+  private readonly translate = inject(TranslateService);
 
   isLoading = signal(true);
 
@@ -42,11 +45,11 @@ export class TodoListComponent implements OnInit {
 
   protected readonly statusFilter = toSignal(this.statusFilter$, { initialValue: null });
 
-  readonly statusOptions: { value: TodoItemStatus | null; label: string }[] = [
-    { value: null, label: "ALL" },
-    { value: TodoItemStatus.TODO, label: "TODO" },
-    { value: TodoItemStatus.IN_PROGRESS, label: "IN_PROGRESS" },
-    { value: TodoItemStatus.COMPLETED, label: "COMPLETED" },
+  readonly statusOptions: { value: TodoItemStatus | null; labelKey: string }[] = [
+    { value: null, labelKey: "status.all" },
+    { value: TodoItemStatus.TODO, labelKey: "board.columns.todo" },
+    { value: TodoItemStatus.IN_PROGRESS, labelKey: "board.columns.inProgress" },
+    { value: TodoItemStatus.COMPLETED, labelKey: "board.columns.done" },
   ];
 
   ngOnInit() {
@@ -70,7 +73,7 @@ export class TodoListComponent implements OnInit {
 
   deleteItem(id: string) {
     this.todoListService.deleteItem(id).subscribe(() => {
-      this.toastService.showToast("Task deleted");
+      this.toastService.showToast(this.translate.instant('todo.deleted'));
       if (this.selectedItemId() === id) {
         this.router.navigate(["/backlog"]);
       }

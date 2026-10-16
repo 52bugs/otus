@@ -1,0 +1,46 @@
+{
+  "app": {
+    "title": "TasksBoard",
+    "section": {
+      "backlog": "Backlog",
+      "board": "Board"
+    },
+    "addTask": "+ Add task"
+  },
+  "board": {
+    "columns": {
+      "todo": "TODO",
+      "inProgress": "IN PROGRESS",
+      "done": "DONE"
+    },
+    "moveBack": "Move back",
+    "moveForward": "Move forward",
+    "noTasks": "No tasks",
+    "taskMoved": "Task moved to {{status}}"
+  },
+  "backlog": {
+    "title": "Task List"
+  },
+  "todo": {
+    "createTitle": "Create Task",
+    "editTitle": "Edit Task",
+    "text": "Task text",
+    "textPlaceholder": "Enter task text",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter description",
+    "status": "Status",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "added": "Task added",
+    "updated": "Task updated",
+    "deleted": "Task deleted",
+    "showDescription": "Show description"
+  },
+  "status": {
+    "all": "All",
+    "todo": "To Do",
+    "inProgress": "In Progress",
+    "completed": "Completed"
+  }
+}

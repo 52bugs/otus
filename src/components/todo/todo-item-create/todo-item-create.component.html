@@ -1,13 +1,13 @@
 <div class="todo-item-create">
   <div class="todo-item-create__fields">
     <mat-form-field class="todo-item-create__input">
-      <mat-label>Title</mat-label>
-      <input matInput placeholder="Add your new todo title" [formControl]="form.controls.title" />
+      <mat-label>{{ 'todo.text' | translate }}</mat-label>
+      <input matInput [placeholder]="'todo.textPlaceholder' | translate" [formControl]="form.controls.title" />
     </mat-form-field>
     <mat-form-field class="todo-item-create__input">
-      <mat-label>Description</mat-label>
-      <textarea matInput placeholder="Add your new todo description" [formControl]="form.controls.description"></textarea>
+      <mat-label>{{ 'todo.description' | translate }}</mat-label>
+      <textarea matInput [placeholder]="'todo.descriptionPlaceholder' | translate" [formControl]="form.controls.description"></textarea>
     </mat-form-field>
   </div>
-  <app-button title="Add task" (click)="onSubmit()" appTooltip="Добавить задачу"></app-button>
+  <app-button [title]="'todo.save' | translate" (click)="onSubmit()" [appTooltip]="'todo.save' | translate"></app-button>
 </div>

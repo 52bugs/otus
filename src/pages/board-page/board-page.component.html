@@ -5,7 +5,7 @@
     @for (column of columns; track column.status) {
       <section class="board-page__column">
         <header class="board-page__column-header">
-          <span class="board-page__column-title">{{ column.title }}</span>
+          <span class="board-page__column-title">{{ column.titleKey | translate }}</span>
           <span class="board-page__column-count">{{ itemsByStatus()[column.status].length }}</span>
         </header>
         <div class="board-page__column-body">
@@ -26,7 +26,7 @@
                   <button
                     type="button"
                     class="board-page__card-arrow"
-                    title="Move back"
+                    [title]="'board.moveBack' | translate"
                     (click)="moveStatus(item, prevStatus, $event)"
                   >
                     &larr;
@@ -36,7 +36,7 @@
                   <button
                     type="button"
                     class="board-page__card-arrow"
-                    title="Move forward"
+                    [title]="'board.moveForward' | translate"
                     (click)="moveStatus(item, nextStatus, $event)"
                   >
                     &rarr;
@@ -45,7 +45,7 @@
               </div>                
             </article>
           } @empty {
-            <span class="board-page__empty">No tasks</span>
+            <span class="board-page__empty">{{ 'board.noTasks' | translate }}</span>
           }
         </div>
       </section>

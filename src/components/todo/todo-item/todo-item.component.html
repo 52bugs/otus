@@ -2,7 +2,7 @@
 <div class="todo-item">
   <div
     class="todo-item__item"
-    appTooltip="Показать описание"
+    [appTooltip]="'todo.showDescription' | translate"
     role="button"
     tabindex="0"
     (click)="showDescription.emit(todoItem.id)"
@@ -14,8 +14,8 @@
       {{ todoItem.status }}
       @if(isEditing()) {
         <mat-form-field class="todo-list__input">
-          <mat-label>Title</mat-label>
-          <input matInput placeholder="Add your new todo title" [(ngModel)]="newTodoText" /> 
+          <mat-label>{{ 'todo.text' | translate }}</mat-label>
+          <input matInput [placeholder]="'todo.textPlaceholder' | translate" [(ngModel)]="newTodoText" /> 
         </mat-form-field>
       } @else {
         <span>{{ todoItem.text }}</span>
@@ -23,8 +23,8 @@
     </div>
   </div>
   @if(isEditing()) {
-    <app-button class="todo-item_btn button--save" title="Save" (click)="updateItemText()" appTooltip="Сохранить изменения"></app-button>
+    <app-button class="todo-item_btn button--save" [title]="'todo.save' | translate" (click)="updateItemText()" [appTooltip]="'todo.save' | translate"></app-button>
   } @else {
-    <app-button class="todo-item_btn button--delete" title="Delete" (click)="deleteItem.emit(todoItem.id)" appTooltip="Завершил задачу"></app-button>    
+    <app-button class="todo-item_btn button--delete" [title]="'todo.delete' | translate" (click)="deleteItem.emit(todoItem.id)" [appTooltip]="'todo.delete' | translate"></app-button>    
   }
 </div>
