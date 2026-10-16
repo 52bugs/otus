@@ -35,6 +35,12 @@
       "description": "someraskdescription2",
       "status": "TODO",
       "id": "olzHDousesM"
+    },
+    {
+      "text": "текстзадачи",
+      "description": "описание",
+      "status": "TODO",
+      "id": "xlgE2el4xCA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

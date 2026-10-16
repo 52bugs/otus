@@ -1,0 +1,46 @@
+{
+  "app": {
+    "title": "ДоскаЗадач",
+    "section": {
+      "backlog": "Бэклог",
+      "board": "Доска"
+    },
+    "addTask": "+ Добавить задачу"
+  },
+  "board": {
+    "columns": {
+      "todo": "К РАБОТЕ",
+      "inProgress": "В ПРОЦЕССЕ",
+      "done": "ГОТОВО"
+    },
+    "moveBack": "Переместить назад",
+    "moveForward": "Переместить вперёд",
+    "noTasks": "Нет задач",
+    "taskMoved": "Задача перемещена в {{status}}"
+  },
+  "backlog": {
+    "title": "Список задач"
+  },
+  "todo": {
+    "createTitle": "Создать задачу",
+    "editTitle": "Редактировать задачу",
+    "text": "Текст задачи",
+    "textPlaceholder": "Введите текст задачи",
+    "description": "Описание",
+    "descriptionPlaceholder": "Введите описание",
+    "status": "Статус",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "added": "Задача добавлена",
+    "updated": "Задача обновлена",
+    "deleted": "Задача удалена",
+    "showDescription": "Показать описание"
+  },
+  "status": {
+    "all": "Все",
+    "todo": "К работе",
+    "inProgress": "В процессе",
+    "completed": "Готово"
+  }
+}
