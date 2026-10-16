@@ -6,10 +6,10 @@
       <section class="board-page__column">
         <header class="board-page__column-header">
           <span class="board-page__column-title">{{ column.title }}</span>
-          <span class="board-page__column-count">{{ columnCount(column.status) }}</span>
+          <span class="board-page__column-count">{{ itemsByStatus()[column.status].length }}</span>
         </header>
         <div class="board-page__column-body">
-          @for (item of columnItems(column.status); track item.id) {
+          @for (item of itemsByStatus()[column.status]; track item.id) {
             <article
               class="board-page__card"
               role="button"
