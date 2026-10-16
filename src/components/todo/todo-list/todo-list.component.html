@@ -6,7 +6,7 @@
     <div class="todo-list__filter">
       <mat-form-field class="todo-list__filter__select" subscriptSizing="dynamic">
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="statusFilter">
+        <mat-select [ngModel]="statusFilter()" (ngModelChange)="statusFilter$.next($event)">
           @for (option of statusOptions; track option.label) {
             <mat-option [value]="option.value">{{ option.label }}</mat-option>
           }
